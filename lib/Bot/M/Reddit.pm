@@ -28,7 +28,7 @@ use base 'Class::Singleton';
 use JSON::PP;
 use LWP::UserAgent;
 
-use Bot::M::DB;
+use Bot::M::DB
 use Bot::V::Log;
 
 sub _new_instance

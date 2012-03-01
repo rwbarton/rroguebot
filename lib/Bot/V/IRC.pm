@@ -104,6 +104,24 @@ sub privmsg
     $self->{irc}->yield(privmsg => $target, $msg);
 }
 
+=head2 topic($target, $msg)
+
+Sends the topic of channel $target to $msg.
+
+=cut
+my $last_topic;
+
+sub topic
+{
+    my ($self, $target, $msg) = @_;
+    confess 'Not yet configured' unless $self->{irc};
+
+    return if defined $last_topic and $last_topic eq $msg;
+    $last_topic = $msg;
+
+    $self->{irc}->yield(topic => $target, $msg);
+}
+
 1;
 
 =head1 AUTHOR

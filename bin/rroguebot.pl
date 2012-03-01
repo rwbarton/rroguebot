@@ -17,7 +17,6 @@ use Getopt::Long;
 
 use Bot::C::Core;
 use Bot::M::Config;
-use Bot::M::DB;
 use Bot::V::Log;
 
 use constant ARGS => qw(config|c=s);
