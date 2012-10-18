@@ -32,10 +32,10 @@ sub _ev_tick
     my ($self) = @_[OBJECT];
 
     my $target = "Sequell";
-    my $msg = "!lg teamcatlobe won t turns<=246813579 s=char";
+    my $msg = "!lg teddybear won t turns<=246813579 s=char";
 
-    # Bot::V::Log->instance()->log("MSG_OUT($target) $msg");
-    # Bot::V::IRC->instance()->privmsg($target, $msg);
+    Bot::V::Log->instance()->log("MSG_OUT($target) $msg");
+    Bot::V::IRC->instance()->privmsg($target, $msg);
 
     $_[HEAP]->{next_alarm_time} = int(time() + 300 + rand(120));
     $_[KERNEL]->alarm(tick => $_[HEAP]->{next_alarm_time});
@@ -117,7 +117,7 @@ sub _ev_on_public
 
 sub current_combos
 {
-    my $clanpage = "http://crawl.akrasiac.org/tourney11/clans/ophanim.html";
+    my $clanpage = "http://seleniac.org/crawl/tourney/12a/clans/ragdoll.html";
     my $clandata = get($clanpage);
     if (defined($clandata)) {
 	my ($gamedata) = ($clandata =~ m|Ongoing Games</h3>\s*<div>\s*(.*?)\s*</div>|m);
@@ -139,8 +139,8 @@ sub compute_topic
 {
     my ($msg) = @_;
 
-    my %races = map { $_ => 1 } qw(Hu HE DE SE MD DD HO Mf Ha Ko Sp Na Ce Og Tr Mi Ke Dr Dg Ds Mu Gh Vp Fe);
-    my %classes = map { $_ => 1 } qw(Fi Gl Mo Hu As Ar Wn Be AK CK DK Pr He Sk En Tm St Wr Wz Cj Su Ne FE IE AE EE VM);
+    my %races = map { $_ => 1 } qw(Ce DD DE Dg Dr Ds Fe Gh Ha HE HO Hu Ko Mf Mi Mu Na Og Op SE Sp Te Tr Vp);
+    my %classes = map { $_ => 1 } qw(AE AK AM Ar As Be Cj CK DK EE En FE Fi Gl He Hu IE Mo Ne Pr Sk St Su Tm VM Wn Wr Wz);
 
     my ($combos) = ($msg =~ /:(.*)$/);
     foreach my $word (split / /, $combos) {
@@ -165,7 +165,7 @@ sub _ev_on_msg
 
     if ($msg =~ /246813579/) {
 	my $topic = compute_topic($msg);
-	Bot::V::IRC->instance()->topic("##catlobe", $topic);
+	Bot::V::IRC->instance()->topic("##crawl-rant", $topic);
 	return;
     }
 
